@@ -24,11 +24,9 @@ void readTrainingData() {
 	int count = 0;
 	int n = 0;
 	while (fgets(buffer, 100, fp) != NULL) {
-		//fgets(buffer, 100, fp);
 		if (fgets(buffer, 100, fp) == NULL) {
 			break;
 		}
-		//printf("%s\n", buffer);
 		removeQuatation(buffer, strlen(buffer) - 1);
 		changeTotxt(buffer);
 		X = readData(buffer);
@@ -45,9 +43,6 @@ void readTrainingData() {
 		makeTransition(X);
 		makeLogScale(X);
 		makeObservationPro(X);
-
-		//printIntransition(X);
-		//printOuttransition(X);
 		acc(X);
 		initAllParameter(X);
 
@@ -55,12 +50,11 @@ void readTrainingData() {
 		if (count % 37 == 0) {
 			n += 3;
 			printf("%d%% trained\n", n);
-			//break;
 		}
 	}
 
 	baum_welch();
-	
+
 
 	printf("done\n");
 	fclose(fp);

@@ -18,7 +18,6 @@ void makeTransition(inputData X) {
 				t.dest_state = d;
 				if (t.prob > 0) {
 					outtransition[p][s].push_back(t);
-					//printf("%d phone, %d state to %d state : %f\n", p, s, d, t.prob);
 				}
 			}
 			for (int d = 0; d < transcript[p + 1]->nOfState - 2; d++) {  // phone to next phone
@@ -27,7 +26,6 @@ void makeTransition(inputData X) {
 				t.dest_state = d;
 				if (t.prob > 0) {
 					outtransition[p][s].push_back(t);
-					//printf("%d phone to %d phone, %d state to %d state : %f\n", p, p + 1, s, d, t.prob);
 				}
 			}
 			if (transcript[p + 1]->indexOfPhone == 17) {  //  next phone "sp" can be skip
@@ -36,7 +34,6 @@ void makeTransition(inputData X) {
 				t.prob = transcript[p]->tp[s + 1][transcript[p]->nOfState - 1] * transcript[p + 2]->tp[0][1] * phonelist[17].tp[0][2];
 				if (t.prob > 0) {
 					outtransition[p][s].push_back(t);
-					//printf("%d phone to %d phone, %dstate to %dstate, skip sp : %f\n", p, p+2, s, transcript[p]->nOfState - 2, t.prob);
 				}
 			}
 		}
@@ -48,7 +45,6 @@ void makeTransition(inputData X) {
 			t.dest_state = d;
 			if (t.prob > 0) {
 				outtransition[X.numOfPhones][s].push_back(t);
-				//printf("last %d phone, %dstate to %dstate : %f\n", X.numOfPhones, s, d, t.prob);
 			}
 		}
 	}
@@ -67,7 +63,6 @@ void makeTransition(inputData X) {
 				t.dest_state = d;
 				if (t.prob > 0) {
 					intransition[p][s].push_back(t);
-					//printf("%d phone, %d state to %d state : %f\n", p, d, s, t.prob);
 				}
 			}
 			for (int d = 0; d < transcript[p - 1]->nOfState - 2; d++) {  // from previous phone
@@ -76,7 +71,6 @@ void makeTransition(inputData X) {
 				t.dest_state = d;
 				if (t.prob > 0) {
 					intransition[p][s].push_back(t);
-					//printf("%d phone from %d phone, %d state to %d state : %f\n", p, p-1, d, s, t.prob);
 				}
 			}
 			if (transcript[p - 1]->indexOfPhone == 17) {  // previous phone is "sp" skip.
@@ -84,7 +78,6 @@ void makeTransition(inputData X) {
 				t.dest_state = transcript[p - 2]->nOfState - 3;
 				t.prob = transcript[p - 2]->tp[transcript[p-2]->nOfState-2][transcript[p-2]->nOfState - 1] * transcript[p]->tp[0][s + 1] * phonelist[17].tp[0][2];
 				if (t.prob > 0)  intransition[p][s].push_back(t);
-				//printf("%d phone from %d phone, %dstate to %dstate, skip sp : %f\n", p, p-2, transcript[p]->nOfState - 2, s, t.prob);
 			}
 		}
 	}
@@ -95,7 +88,6 @@ void makeTransition(inputData X) {
 			t.dest_state = d;
 			if (t.prob > 0) {
 				intransition[1][s].push_back(t);
-				//printf("first %d phone, %dstate to %dstate : %f\n", 1, d, s, t.prob);
 			}
 		}
 	}
